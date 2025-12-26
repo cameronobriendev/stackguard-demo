@@ -145,7 +145,15 @@ export default function AlertDetailModal({ isOpen, onClose, alert }) {
               {/* Footer */}
               <div className="p-6 border-t border-sg-border flex items-center justify-between">
                 <p className="text-xs text-sg-muted">
-                  This is a demo with simulated data
+                  Wondering if custom code might be right for you?{' '}
+                  <a
+                    href="https://cal.cameronobrien.dev"
+                    className="text-sg-primary hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book a call
+                  </a>
                 </p>
                 <button
                   onClick={onClose}

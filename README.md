@@ -8,7 +8,7 @@ A demo dashboard for business owners to monitor their no-code tech stack health 
 
 StackGuard gives business owners a single view of their entire no-code stack (Zapier, Airtable, Make.com, Bubble, etc.) instead of checking 10 different platforms every morning.
 
-This is a **demo with simulated data** - no actual tools are connected.
+Wondering if custom code might be right for you? [Book a call with Cameron](https://cal.cameronobrien.dev)
 
 ## Features
 

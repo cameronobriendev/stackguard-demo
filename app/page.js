@@ -292,7 +292,15 @@ export default function StackGuardDemo() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-sm text-sg-muted">
-                This is a demo with simulated data. No actual tools are connected.
+                Wondering if custom code might be right for you?{' '}
+                <a
+                  href="https://cal.cameronobrien.dev"
+                  className="text-sg-primary hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book a call with Cameron
+                </a>
               </p>
               <p className="text-sm text-sg-muted mt-1">
                 Built by{' '}
