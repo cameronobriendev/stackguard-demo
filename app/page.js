@@ -12,7 +12,7 @@ import ActivityFeed from '@/components/ActivityFeed'
 import ThemeToggle from '@/components/ThemeToggle'
 import Toast from '@/components/Toast'
 
-// Toast alerts pool
+// Toast alerts pool - rotates on each visit
 const toastAlerts = [
   {
     type: 'warning',
@@ -37,6 +37,30 @@ const toastAlerts = [
     title: 'Stack costs trending up',
     message: 'This month is 18% higher than last month with 11 days remaining.',
     action: 'View Breakdown'
+  },
+  {
+    type: 'critical',
+    title: 'Bubble app response time spiked',
+    message: 'App responding in 2.4s vs normal 340ms. Users may experience slowdowns.',
+    action: 'Check Performance'
+  },
+  {
+    type: 'warning',
+    title: 'Notion API rate limit warning',
+    message: 'Hit 80% of hourly request limit. Sync frequency may need adjustment.',
+    action: 'Review Usage'
+  },
+  {
+    type: 'warning',
+    title: 'Google Sheets quota at 67%',
+    message: 'Read operations trending high. May hit daily limit by 4pm.',
+    action: 'See Breakdown'
+  },
+  {
+    type: 'critical',
+    title: 'Webflow form not submitting',
+    message: 'Contact form webhook failed 3 times in the last hour. Leads may be lost.',
+    action: 'Fix Now'
   }
 ]
 
@@ -45,20 +69,18 @@ export default function StackGuardDemo() {
   const [toastAlert, setToastAlert] = useState(null)
 
   useEffect(() => {
-    // Only show once per session
-    if (typeof window !== 'undefined' && sessionStorage.getItem('stackguard-toast-shown')) {
-      return
-    }
-
     const timer = setTimeout(() => {
-      const randomAlert = toastAlerts[Math.floor(Math.random() * toastAlerts.length)]
-      setToastAlert(randomAlert)
-      setShowToast(true)
-
+      // Get next toast index from localStorage, rotate through all 8
+      let nextIndex = 0
       if (typeof window !== 'undefined') {
-        sessionStorage.setItem('stackguard-toast-shown', 'true')
+        const lastIndex = parseInt(localStorage.getItem('stackguard-toast-index') || '-1', 10)
+        nextIndex = (lastIndex + 1) % toastAlerts.length
+        localStorage.setItem('stackguard-toast-index', nextIndex.toString())
       }
-    }, 20000) // 20 seconds after page load
+
+      setToastAlert(toastAlerts[nextIndex])
+      setShowToast(true)
+    }, 8000) // 8 seconds after page load
 
     return () => clearTimeout(timer)
   }, [])

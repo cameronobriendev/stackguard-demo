@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
 
 export default function Toast({ show, onDismiss, alert }) {
-  if (!alert) return null
-
   const getAlertStyles = (type) => {
     switch (type) {
       case 'critical':
@@ -28,6 +26,8 @@ export default function Toast({ show, onDismiss, alert }) {
         }
     }
   }
+
+  if (!alert) return null
 
   const styles = getAlertStyles(alert.type)
 
