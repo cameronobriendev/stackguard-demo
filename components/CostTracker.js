@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 import { costBreakdown } from '@/lib/mockData'
 
 export default function CostTracker() {
@@ -58,7 +59,7 @@ export default function CostTracker() {
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-primary">payments</span>
+          <Icon name="payments" className="text-sg-primary" size={24} />
           Monthly Costs
         </h3>
       </div>
@@ -70,9 +71,7 @@ export default function CostTracker() {
           <span className="text-sg-muted mb-1">/ month</span>
         </div>
         <div className={`flex items-center gap-1 text-sm ${costs.change > 0 ? 'text-sg-warning' : 'text-sg-healthy'}`}>
-          <span className="material-symbols-outlined text-sm">
-            {costs.change > 0 ? 'trending_up' : 'trending_down'}
-          </span>
+          <Icon name={costs.change > 0 ? 'trending_up' : 'trending_down'} size={18} />
           <span>{costs.change > 0 ? '+' : ''}{costs.change}% from last month</span>
         </div>
       </div>

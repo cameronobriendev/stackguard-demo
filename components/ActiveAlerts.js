@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 import { alertPool } from '@/lib/mockData'
 
 export default function ActiveAlerts() {
@@ -10,33 +11,13 @@ export default function ActiveAlerts() {
 
   useEffect(() => {
     setMounted(true)
-
-    // Start with 2 alerts
-    setActiveAlerts(alertPool.slice(0, 2))
-
-    // Cycle alerts - remove one and add another periodically
-    const interval = setInterval(() => {
-      setActiveAlerts(prev => {
-        // 30% chance to remove an alert (resolve it)
-        if (prev.length > 1 && Math.random() < 0.3) {
-          return prev.slice(1)
-        }
-
-        // 40% chance to add a new alert if under 3
-        if (prev.length < 3 && Math.random() < 0.4) {
-          const available = alertPool.filter(a => !prev.find(p => p.id === a.id))
-          if (available.length > 0) {
-            const newAlert = available[Math.floor(Math.random() * available.length)]
-            return [...prev, newAlert]
-          }
-        }
-
-        return prev
-      })
-    }, 8000)
-
-    return () => clearInterval(interval)
+    // Start with all alerts - user dismisses them manually
+    setActiveAlerts([...alertPool])
   }, [])
+
+  const dismissAlert = (alertId) => {
+    setActiveAlerts(prev => prev.filter(a => a.id !== alertId))
+  }
 
   const getAlertStyles = (type) => {
     switch (type) {
@@ -90,13 +71,13 @@ export default function ActiveAlerts() {
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-warning">notifications_active</span>
+          <Icon name="notifications_active" className="text-sg-warning" size={24} />
           Active Alerts
         </h3>
         <span className="text-sm text-sg-muted">{activeAlerts.length} active</span>
       </div>
 
-      <div className="space-y-3 min-h-[200px]">
+      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
         <AnimatePresence mode="popLayout">
           {activeAlerts.map((alert) => {
             const styles = getAlertStyles(alert.type)
@@ -112,20 +93,27 @@ export default function ActiveAlerts() {
                 className={`rounded-xl p-4 border ${styles.bg}`}
               >
                 <div className="flex items-start gap-3">
-                  <span className={`material-symbols-outlined ${styles.icon} mt-0.5`}>
-                    {alert.icon}
-                  </span>
+                  <Icon name={alert.icon} className={`${styles.icon} mt-0.5`} size={20} />
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-medium text-sm">{alert.title}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded-full text-white ${styles.badge}`}>
-                        {alert.tool}
-                      </span>
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-sm">{alert.title}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-full text-white ${styles.badge}`}>
+                          {alert.tool}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => dismissAlert(alert.id)}
+                        className="text-sg-muted hover:text-sg-text transition-colors p-1 -m-1"
+                        aria-label="Dismiss alert"
+                      >
+                        <Icon name="close" size={20} />
+                      </button>
                     </div>
                     <p className="text-sm text-sg-muted mb-2">{alert.message}</p>
                     <button className="text-xs text-sg-primary hover:underline flex items-center gap-1">
                       {alert.action}
-                      <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                      <Icon name="arrow_forward" size={12} />
                     </button>
                   </div>
                 </div>
@@ -140,7 +128,7 @@ export default function ActiveAlerts() {
             animate={{ opacity: 1 }}
             className="flex flex-col items-center justify-center py-8 text-sg-muted"
           >
-            <span className="material-symbols-outlined text-4xl text-sg-healthy mb-2">check_circle</span>
+            <Icon name="check_circle" className="text-sg-healthy mb-2" size={40} />
             <p className="text-sm">All clear! No active alerts.</p>
           </motion.div>
         )}

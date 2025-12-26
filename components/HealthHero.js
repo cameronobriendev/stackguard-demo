@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 
 export default function HealthHero() {
   const [healthScore, setHealthScore] = useState(94)
@@ -113,17 +114,17 @@ export default function HealthHero() {
       {/* Stats row */}
       <div className="flex items-center justify-center gap-6 text-sm text-sg-muted">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-primary text-lg">link</span>
+          <Icon name="link" className="text-sg-primary" size={20} />
           <span><strong className="text-sg-text">8</strong> Tools Connected</span>
         </div>
         <div className="w-px h-4 bg-sg-border"></div>
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-primary text-lg">automation</span>
+          <Icon name="automation" className="text-sg-primary" size={20} />
           <span><strong className="text-sg-text">47</strong> Automations</span>
         </div>
         <div className="w-px h-4 bg-sg-border"></div>
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-healthy text-lg live-pulse">radio_button_checked</span>
+          <Icon name="radio_button_checked" className="text-sg-healthy live-pulse" size={20} />
           <span>Last check: <strong className="text-sg-text">{lastCheck}s</strong> ago</span>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 import { tools } from '@/lib/mockData'
 
 export default function ConnectedTools() {
@@ -81,7 +82,7 @@ export default function ConnectedTools() {
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-primary">hub</span>
+          <Icon name="hub" className="text-sg-primary" size={24} />
           Connected Tools
         </h3>
         <span className="text-sm text-sg-muted">8 active</span>
@@ -98,9 +99,7 @@ export default function ConnectedTools() {
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-sg-muted group-hover:text-sg-text transition-colors">
-                  {tool.icon}
-                </span>
+                <Icon name={tool.icon} className="text-sg-muted group-hover:text-sg-text transition-colors" size={20} />
                 <span className="font-medium text-sm">{tool.name}</span>
               </div>
               <div className={`w-2 h-2 rounded-full ${getStatusColor(tool.status)}`}></div>

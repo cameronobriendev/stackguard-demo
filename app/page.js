@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 import HealthHero from '@/components/HealthHero'
 import ActiveAlerts from '@/components/ActiveAlerts'
 import ConnectedTools from '@/components/ConnectedTools'
@@ -57,9 +58,6 @@ export default function StackGuardDemo() {
       if (typeof window !== 'undefined') {
         sessionStorage.setItem('stackguard-toast-shown', 'true')
       }
-
-      // Auto-dismiss after 8 seconds
-      setTimeout(() => setShowToast(false), 8000)
     }, 20000) // 20 seconds after page load
 
     return () => clearTimeout(timer)
@@ -75,7 +73,7 @@ export default function StackGuardDemo() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sg-primary to-purple-500 flex items-center justify-center">
-                <span className="material-symbols-outlined text-white">shield</span>
+                <Icon name="shield" className="text-white" size={24} />
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -96,7 +94,7 @@ export default function StackGuardDemo() {
                 rel="noopener noreferrer"
                 className="text-sm text-sg-muted hover:text-sg-text transition-colors flex items-center gap-1 px-3 py-2"
               >
-                <span className="material-symbols-outlined text-sm">arrow_back</span>
+                <Icon name="arrow_back" className="text-sm" size={16} />
                 Portfolio
               </a>
             </div>

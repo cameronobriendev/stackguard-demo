@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 import { activityTemplates } from '@/lib/mockData'
 
 export default function ActivityFeed() {
@@ -89,7 +90,7 @@ export default function ActivityFeed() {
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-primary">history</span>
+          <Icon name="history" className="text-sg-primary" size={24} />
           Activity Feed
         </h3>
         <div className="flex items-center gap-2 text-sm">
@@ -113,9 +114,7 @@ export default function ActivityFeed() {
               <span className="text-xs text-sg-muted w-12 shrink-0 pt-0.5">
                 {formatTimestamp(activity.timestamp)}
               </span>
-              <span className={`material-symbols-outlined text-sm ${getTypeStyles(activity.type)}`}>
-                {activity.icon}
-              </span>
+              <Icon name={activity.icon} className={getTypeStyles(activity.type)} size={18} />
               <div className="flex-1 min-w-0">
                 <span className="text-sm">
                   <span className="font-medium">{activity.tool}</span>

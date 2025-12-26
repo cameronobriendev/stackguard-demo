@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 import { usageLimits } from '@/lib/mockData'
 
 export default function UsageLimits() {
@@ -73,7 +74,7 @@ export default function UsageLimits() {
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-sg-primary">data_usage</span>
+          <Icon name="data_usage" className="text-sg-primary" size={24} />
           Usage & Limits
         </h3>
       </div>
@@ -120,7 +121,7 @@ export default function UsageLimits() {
                 <span>{formatNumber(limit.current)} / {formatNumber(limit.limit)}</span>
                 {limit.prediction && (
                   <span className={`flex items-center gap-1 ${percent >= 75 ? 'text-sg-warning' : ''}`}>
-                    <span className="material-symbols-outlined text-xs">warning</span>
+                    <Icon name="warning" size={12} />
                     {limit.prediction}
                   </span>
                 )}

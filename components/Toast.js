@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import Icon from '@/components/icons/Icon'
 
 export default function Toast({ show, onDismiss, alert }) {
   if (!alert) return null
@@ -34,18 +35,20 @@ export default function Toast({ show, onDismiss, alert }) {
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ opacity: 0, y: 50, x: 20, scale: 0.95 }}
+          initial={{ opacity: 0, y: -50, x: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.95 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className={`fixed bottom-6 right-6 z-50 max-w-sm glass-card rounded-xl p-4 border-l-4 ${styles.border} shadow-2xl`}
+          className={`fixed top-20 right-6 z-50 max-w-sm glass-card rounded-xl p-4 border-l-4 ${styles.border} shadow-2xl`}
         >
           <div className="flex items-start gap-3">
             {/* Icon */}
             <div className={`p-2 rounded-lg ${styles.iconBg}`}>
-              <span className={`material-symbols-outlined ${styles.icon}`}>
-                {alert.type === 'critical' ? 'error' : alert.type === 'warning' ? 'warning' : 'notifications'}
-              </span>
+              <Icon
+                name={alert.type === 'critical' ? 'error' : alert.type === 'warning' ? 'warning' : 'notifications'}
+                className={styles.icon}
+                size={24}
+              />
             </div>
 
             {/* Content */}
@@ -59,7 +62,7 @@ export default function Toast({ show, onDismiss, alert }) {
                   className="text-sg-muted hover:text-sg-text transition-colors p-1 -m-1"
                   aria-label="Dismiss"
                 >
-                  <span className="material-symbols-outlined text-lg">close</span>
+                  <Icon name="close" size={20} />
                 </button>
               </div>
               <p className="text-sm font-medium text-sg-text mb-1">{alert.title}</p>
@@ -79,13 +82,6 @@ export default function Toast({ show, onDismiss, alert }) {
             </div>
           </div>
 
-          {/* Progress bar for auto-dismiss */}
-          <motion.div
-            initial={{ width: '100%' }}
-            animate={{ width: '0%' }}
-            transition={{ duration: 8, ease: 'linear' }}
-            className="absolute bottom-0 left-0 h-1 bg-sg-primary/30 rounded-b-xl"
-          />
         </motion.div>
       )}
     </AnimatePresence>
