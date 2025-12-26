@@ -105,3 +105,27 @@ body {
 .toast-enter {
   animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Custom scrollbar - theme aware */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sg-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--sg-border);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sg-muted);
+}
