@@ -6,7 +6,6 @@ import Icon from '@/components/icons/Icon'
 
 export default function HealthHero() {
   const [healthScore, setHealthScore] = useState(94)
-  const [lastCheck, setLastCheck] = useState(0)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -20,20 +19,8 @@ export default function HealthHero() {
       })
     }, 5000)
 
-    // Last check counter increments every second
-    const checkInterval = setInterval(() => {
-      setLastCheck(prev => prev + 1)
-    }, 1000)
-
-    // Reset last check periodically (simulates actual checks)
-    const resetInterval = setInterval(() => {
-      setLastCheck(0)
-    }, 30000)
-
     return () => {
       clearInterval(healthInterval)
-      clearInterval(checkInterval)
-      clearInterval(resetInterval)
     }
   }, [])
 
@@ -125,7 +112,7 @@ export default function HealthHero() {
         <div className="w-px h-4 bg-sg-border"></div>
         <div className="flex items-center gap-2">
           <Icon name="radio_button_checked" className="text-sg-healthy live-pulse" size={20} />
-          <span>Last check: <strong className="text-sg-text">{lastCheck}s</strong> ago</span>
+          <span className="text-sg-text font-medium">Live checking</span>
         </div>
       </div>
     </motion.div>

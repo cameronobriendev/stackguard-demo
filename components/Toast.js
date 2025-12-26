@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
 
-export default function Toast({ show, onDismiss, alert }) {
+export default function Toast({ show, onDismiss, alert, onActionClick }) {
   const getAlertStyles = (type) => {
     switch (type) {
       case 'critical':
@@ -68,7 +68,10 @@ export default function Toast({ show, onDismiss, alert }) {
               <p className="text-sm font-medium text-sg-text mb-1">{alert.title}</p>
               <p className="text-xs text-sg-muted mb-3">{alert.message}</p>
               <div className="flex items-center gap-2">
-                <button className="text-xs font-medium text-sg-primary hover:underline">
+                <button
+                  onClick={() => onActionClick && onActionClick(alert)}
+                  className="text-xs font-medium text-sg-primary hover:underline"
+                >
                   {alert.action}
                 </button>
                 <span className="text-sg-muted">|</span>

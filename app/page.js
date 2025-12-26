@@ -11,6 +11,7 @@ import CostTracker from '@/components/CostTracker'
 import ActivityFeed from '@/components/ActivityFeed'
 import ThemeToggle from '@/components/ThemeToggle'
 import Toast from '@/components/Toast'
+import AlertDetailModal from '@/components/AlertDetailModal'
 
 // Toast alerts pool - rotates on each visit
 const toastAlerts = [
@@ -18,55 +19,195 @@ const toastAlerts = [
     type: 'warning',
     title: 'Zapier task usage at 78%',
     message: 'Approaching monthly limit. At current rate, you\'ll exceed by ~2,100 tasks.',
-    action: 'View Details'
+    action: 'View Details',
+    tool: 'Zapier',
+    risks: [
+      'Overage charges of $0.01-0.05 per extra task add up fast',
+      'Task-based pricing punishes business growth',
+      'No warning before hitting limits on basic plans',
+      'Upgrade to next tier often 2-3x the price'
+    ],
+    solution: {
+      description: 'Self-hosted n8n gives you unlimited workflow executions for a flat $5-10/mo server cost.',
+      benefits: [
+        'Unlimited executions (no task limits)',
+        'Same visual workflow builder',
+        'Full error handling and logging',
+        'One-time setup, forever savings'
+      ]
+    }
   },
   {
     type: 'critical',
     title: 'Airtable sync delayed 4 minutes',
     message: 'Customer CRM sync is running slower than usual. May indicate API rate limiting.',
-    action: 'Check Status'
+    action: 'View Details',
+    tool: 'Airtable',
+    risks: [
+      'API rate limits (5 req/sec) cause cascading delays',
+      'No visibility into what\'s causing the slowdown',
+      'Sync failures can cause data inconsistencies',
+      'Premium API access requires Enterprise plan'
+    ],
+    solution: {
+      description: 'A PostgreSQL database with real-time sync has no rate limits and sub-second response times.',
+      benefits: [
+        'No API rate limits',
+        'Real-time data access',
+        'Full query optimization control',
+        'Direct database connections'
+      ]
+    }
   },
   {
     type: 'warning',
     title: 'Make.com scenario took 6.2s',
     message: '"Order Processing" scenario execution time increased 300% from baseline.',
-    action: 'Investigate'
+    action: 'View Details',
+    tool: 'Make.com',
+    risks: [
+      'Slow scenarios consume more operations (costs more)',
+      'Timeouts can cause partial data processing',
+      'No visibility into which module is slow',
+      'Debugging requires manual step-by-step testing'
+    ],
+    solution: {
+      description: 'A Node.js script processes the same data in milliseconds with full performance profiling.',
+      benefits: [
+        'Sub-second processing times',
+        'Built-in performance profiling',
+        'Parallel processing support',
+        'Full debugging and logging'
+      ]
+    }
   },
   {
     type: 'warning',
     title: 'Stack costs trending up',
     message: 'This month is 18% higher than last month with 11 days remaining.',
-    action: 'View Breakdown'
+    action: 'View Details',
+    tool: 'Costs',
+    risks: [
+      'Usage-based pricing makes costs unpredictable',
+      'Success = higher bills (growth is punished)',
+      'No spending alerts until you check manually',
+      'Vendor price increases happen without warning'
+    ],
+    solution: {
+      description: 'Custom solutions have fixed costs. A $20/mo server replaces $500+ in subscriptions.',
+      benefits: [
+        'Fixed, predictable monthly costs',
+        'No usage-based surprises',
+        'Costs don\'t scale with growth',
+        'Full cost transparency'
+      ]
+    }
   },
   {
     type: 'critical',
     title: 'Bubble app response time spiked',
     message: 'App responding in 2.4s vs normal 340ms. Users may experience slowdowns.',
-    action: 'Check Performance'
+    action: 'View Details',
+    tool: 'Bubble',
+    risks: [
+      'Shared infrastructure means unpredictable performance',
+      'No control over server resources or scaling',
+      'Database queries are unoptimizable black boxes',
+      '2+ second loads cause 50%+ user abandonment'
+    ],
+    solution: {
+      description: 'A Next.js app on Vercel delivers sub-500ms loads globally with edge deployment.',
+      benefits: [
+        'Sub-500ms global load times',
+        'Automatic edge caching',
+        'Full performance control',
+        'Scales automatically under load'
+      ]
+    }
   },
   {
     type: 'warning',
     title: 'Notion API rate limit warning',
     message: 'Hit 80% of hourly request limit. Sync frequency may need adjustment.',
-    action: 'Review Usage'
+    action: 'View Details',
+    tool: 'Notion',
+    risks: [
+      '3 requests/second limit causes sync bottlenecks',
+      'Rate limit errors require manual retry logic',
+      'No real-time sync capability',
+      'Bulk operations require pagination and waiting'
+    ],
+    solution: {
+      description: 'A direct database connection has no rate limits and supports real-time subscriptions.',
+      benefits: [
+        'No rate limits whatsoever',
+        'Real-time data subscriptions',
+        'Bulk operations in milliseconds',
+        'Full query flexibility'
+      ]
+    }
   },
   {
     type: 'warning',
     title: 'Google Sheets quota at 67%',
     message: 'Read operations trending high. May hit daily limit by 4pm.',
-    action: 'See Breakdown'
+    action: 'View Details',
+    tool: 'Google Sheets',
+    risks: [
+      '300 requests/minute per project limit',
+      'Quota resets are unpredictable',
+      'Cell limits (10M) cap data storage',
+      'Performance degrades severely past 50k rows'
+    ],
+    solution: {
+      description: 'A proper database handles millions of rows with consistent sub-second query times.',
+      benefits: [
+        'Millions of rows, no slowdown',
+        'No daily quota limits',
+        'Proper indexing and optimization',
+        'Concurrent access without conflicts'
+      ]
+    }
   },
   {
     type: 'critical',
     title: 'Webflow form not submitting',
     message: 'Contact form webhook failed 3 times in the last hour. Leads may be lost.',
-    action: 'Fix Now'
+    action: 'View Details',
+    tool: 'Webflow',
+    risks: [
+      'Webhook failures happen silently (leads lost)',
+      'No retry mechanism for failed submissions',
+      'Form spam requires expensive add-ons',
+      'Limited form field types and validation'
+    ],
+    solution: {
+      description: 'A custom form endpoint with proper error handling, retries, and spam protection.',
+      benefits: [
+        'Automatic retry on failures',
+        'Built-in spam protection',
+        'Full validation control',
+        'Never lose a lead'
+      ]
+    }
   }
 ]
 
 export default function StackGuardDemo() {
   const [showToast, setShowToast] = useState(false)
   const [toastAlert, setToastAlert] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedAlert, setSelectedAlert] = useState(null)
+
+  const openAlertModal = (alert) => {
+    setSelectedAlert(alert)
+    setIsModalOpen(true)
+  }
+
+  const closeAlertModal = () => {
+    setIsModalOpen(false)
+    setSelectedAlert(null)
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -131,7 +272,7 @@ export default function StackGuardDemo() {
 
         {/* Row 2: Alerts + Connected Tools */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ActiveAlerts />
+          <ActiveAlerts onAlertClick={openAlertModal} />
           <ConnectedTools />
         </div>
 
@@ -192,7 +333,10 @@ export default function StackGuardDemo() {
       </footer>
 
       {/* Toast notification */}
-      <Toast show={showToast} onDismiss={dismissToast} alert={toastAlert} />
+      <Toast show={showToast} onDismiss={dismissToast} alert={toastAlert} onActionClick={openAlertModal} />
+
+      {/* Alert detail modal */}
+      <AlertDetailModal isOpen={isModalOpen} onClose={closeAlertModal} alert={selectedAlert} />
     </div>
   )
 }

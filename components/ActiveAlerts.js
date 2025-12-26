@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
 import { alertPool } from '@/lib/mockData'
 
-export default function ActiveAlerts() {
+export default function ActiveAlerts({ onAlertClick }) {
   const [activeAlerts, setActiveAlerts] = useState([])
   const [mounted, setMounted] = useState(false)
 
@@ -77,7 +77,7 @@ export default function ActiveAlerts() {
         <span className="text-sm text-sg-muted">{activeAlerts.length} active</span>
       </div>
 
-      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+      <div className="space-y-3 max-h-[400px] overflow-y-auto">
         <AnimatePresence mode="popLayout">
           {activeAlerts.map((alert) => {
             const styles = getAlertStyles(alert.type)
@@ -111,7 +111,10 @@ export default function ActiveAlerts() {
                       </button>
                     </div>
                     <p className="text-sm text-sg-muted mb-2">{alert.message}</p>
-                    <button className="text-xs text-sg-primary hover:underline flex items-center gap-1">
+                    <button
+                      onClick={() => onAlertClick && onAlertClick(alert)}
+                      className="text-xs text-sg-primary hover:underline flex items-center gap-1"
+                    >
                       {alert.action}
                       <Icon name="arrow_forward" size={12} />
                     </button>
