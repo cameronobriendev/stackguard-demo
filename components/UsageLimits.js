@@ -4,30 +4,31 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
 import { usageLimits } from '@/lib/mockData'
+import { useCheckCycle } from '@/lib/useCheckCycle'
 
 export default function UsageLimits() {
   const [limits, setLimits] = useState(usageLimits)
   const [mounted, setMounted] = useState(false)
+  const { checkCount } = useCheckCycle()
 
   useEffect(() => {
     setMounted(true)
-
-    // Simulate small usage increments
-    const interval = setInterval(() => {
-      setLimits(prev => prev.map(limit => {
-        if (Math.random() > 0.6) {
-          const increment = Math.floor(Math.random() * 20) + 1
-          return {
-            ...limit,
-            current: Math.min(limit.limit, limit.current + increment)
-          }
-        }
-        return limit
-      }))
-    }, 10000)
-
-    return () => clearInterval(interval)
   }, [])
+
+  // Update usage values when a check happens
+  useEffect(() => {
+    if (checkCount === 0) return // Skip initial
+    setLimits(prev => prev.map(limit => {
+      if (Math.random() > 0.6) {
+        const increment = Math.floor(Math.random() * 20) + 1
+        return {
+          ...limit,
+          current: Math.min(limit.limit, limit.current + increment)
+        }
+      }
+      return limit
+    }))
+  }, [checkCount])
 
   const getBarColor = (current, limit) => {
     const percent = (current / limit) * 100

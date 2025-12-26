@@ -12,6 +12,7 @@ import ActivityFeed from '@/components/ActivityFeed'
 import ThemeToggle from '@/components/ThemeToggle'
 import Toast from '@/components/Toast'
 import AlertDetailModal from '@/components/AlertDetailModal'
+import { CheckCycleProvider } from '@/lib/useCheckCycle'
 
 // Toast alerts pool - rotates on each visit
 const toastAlerts = [
@@ -229,6 +230,7 @@ export default function StackGuardDemo() {
   const dismissToast = () => setShowToast(false)
 
   return (
+    <CheckCycleProvider>
     <div className="min-h-screen bg-sg-bg transition-colors duration-300">
       {/* Header */}
       <header className="border-b border-sg-border sticky top-0 bg-sg-bg/80 backdrop-blur-xl z-40 transition-colors duration-300">
@@ -338,5 +340,6 @@ export default function StackGuardDemo() {
       {/* Alert detail modal */}
       <AlertDetailModal isOpen={isModalOpen} onClose={closeAlertModal} alert={selectedAlert} />
     </div>
+    </CheckCycleProvider>
   )
 }

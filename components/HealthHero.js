@@ -3,26 +3,25 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
+import { useCheckCycle } from '@/lib/useCheckCycle'
 
 export default function HealthHero() {
   const [healthScore, setHealthScore] = useState(94)
   const [mounted, setMounted] = useState(false)
+  const { secondsSinceCheck, checkCount } = useCheckCycle()
 
   useEffect(() => {
     setMounted(true)
-
-    // Health score fluctuates between 91-97
-    const healthInterval = setInterval(() => {
-      setHealthScore(prev => {
-        const delta = Math.random() > 0.5 ? 1 : -1
-        return Math.max(91, Math.min(97, prev + delta))
-      })
-    }, 5000)
-
-    return () => {
-      clearInterval(healthInterval)
-    }
   }, [])
+
+  // Update health score only when a check happens
+  useEffect(() => {
+    if (checkCount === 0) return // Skip initial
+    setHealthScore(prev => {
+      const delta = Math.random() > 0.5 ? 1 : -1
+      return Math.max(91, Math.min(97, prev + delta))
+    })
+  }, [checkCount])
 
   const getHealthColor = (score) => {
     if (score >= 90) return 'sg-healthy'
@@ -112,7 +111,7 @@ export default function HealthHero() {
         <div className="w-px h-4 bg-sg-border"></div>
         <div className="flex items-center gap-2">
           <Icon name="radio_button_checked" className="text-sg-healthy live-pulse" size={20} />
-          <span className="text-sg-text font-medium">Live checking</span>
+          <span>Last check: <strong className="text-sg-text">{secondsSinceCheck}s</strong> ago</span>
         </div>
       </div>
     </motion.div>

@@ -4,34 +4,35 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
 import { tools } from '@/lib/mockData'
+import { useCheckCycle } from '@/lib/useCheckCycle'
 
 export default function ConnectedTools() {
   const [toolData, setToolData] = useState(tools)
   const [mounted, setMounted] = useState(false)
+  const { checkCount } = useCheckCycle()
 
   useEffect(() => {
     setMounted(true)
+  }, [])
 
-    // Simulate small metric changes
-    const interval = setInterval(() => {
-      setToolData(prev => prev.map(tool => {
-        // Only update certain tools randomly
-        if (Math.random() > 0.7) {
-          const change = Math.floor(Math.random() * 10) - 3
-          return {
-            ...tool,
-            metric: {
-              ...tool.metric,
-              value: Math.max(0, tool.metric.value + change)
-            }
+  // Update tool metrics when a check happens
+  useEffect(() => {
+    if (checkCount === 0) return // Skip initial
+    setToolData(prev => prev.map(tool => {
+      // Only update certain tools randomly
+      if (Math.random() > 0.7) {
+        const change = Math.floor(Math.random() * 10) - 3
+        return {
+          ...tool,
+          metric: {
+            ...tool.metric,
+            value: Math.max(0, tool.metric.value + change)
           }
         }
-        return tool
-      }))
-    }, 8000)
-
-    return () => clearInterval(interval)
-  }, [])
+      }
+      return tool
+    }))
+  }, [checkCount])
 
   const getStatusColor = (status) => {
     switch (status) {

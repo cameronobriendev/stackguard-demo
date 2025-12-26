@@ -4,11 +4,13 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Icon from '@/components/icons/Icon'
 import { activityTemplates } from '@/lib/mockData'
+import { useCheckCycle } from '@/lib/useCheckCycle'
 
 export default function ActivityFeed() {
   const [activities, setActivities] = useState([])
   const [mounted, setMounted] = useState(false)
   const activityIdRef = useRef(0)
+  const { checkCount } = useCheckCycle()
 
   useEffect(() => {
     setMounted(true)
@@ -20,21 +22,19 @@ export default function ActivityFeed() {
       timestamp: Date.now() - (index * 15000) // Stagger timestamps
     }))
     setActivities(initialActivities)
-
-    // Add new activities periodically
-    const interval = setInterval(() => {
-      const template = activityTemplates[Math.floor(Math.random() * activityTemplates.length)]
-      const newActivity = {
-        ...template,
-        id: activityIdRef.current++,
-        timestamp: Date.now()
-      }
-
-      setActivities(prev => [newActivity, ...prev.slice(0, 9)])
-    }, 8000 + Math.random() * 4000)
-
-    return () => clearInterval(interval)
   }, [])
+
+  // Add new activity when a check happens
+  useEffect(() => {
+    if (checkCount === 0) return // Skip initial
+    const template = activityTemplates[Math.floor(Math.random() * activityTemplates.length)]
+    const newActivity = {
+      ...template,
+      id: activityIdRef.current++,
+      timestamp: Date.now()
+    }
+    setActivities(prev => [newActivity, ...prev.slice(0, 9)])
+  }, [checkCount])
 
   // Update timestamps every second
   const [now, setNow] = useState(Date.now())
