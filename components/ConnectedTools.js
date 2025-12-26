@@ -61,10 +61,10 @@ export default function ConnectedTools() {
     return (
       <div className="glass-card rounded-2xl p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-slate-700 rounded w-40 mb-4"></div>
+          <div className="h-6 bg-sg-border rounded w-40 mb-4"></div>
           <div className="grid grid-cols-2 gap-3">
             {[1,2,3,4,5,6,7,8].map(i => (
-              <div key={i} className="h-20 bg-slate-700 rounded-xl"></div>
+              <div key={i} className="h-20 bg-sg-border rounded-xl"></div>
             ))}
           </div>
         </div>
@@ -94,11 +94,11 @@ export default function ConnectedTools() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800 transition-colors cursor-pointer group"
+            className="bg-sg-card/50 rounded-xl p-4 hover:bg-sg-card transition-colors cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-sg-muted group-hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-sg-muted group-hover:text-sg-text transition-colors">
                   {tool.icon}
                 </span>
                 <span className="font-medium text-sm">{tool.name}</span>
@@ -111,7 +111,7 @@ export default function ConnectedTools() {
                 key={tool.metric.value}
                 initial={{ opacity: 0.5 }}
                 animate={{ opacity: 1 }}
-                className="text-white font-medium"
+                className="text-sg-text font-medium"
               >
                 {formatNumber(tool.metric.value)}
               </motion.span>
@@ -121,7 +121,7 @@ export default function ConnectedTools() {
             {/* Usage bar for tools with limits */}
             {tool.usage && tool.usage.limit < 999999 && (
               <div className="mt-2">
-                <div className="w-full h-1 bg-slate-700 rounded-full overflow-hidden">
+                <div className="w-full h-1 bg-sg-border rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
                       (tool.usage.current / tool.usage.limit) > 0.85 ? 'bg-sg-warning' : 'bg-sg-primary'

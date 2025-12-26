@@ -53,10 +53,10 @@ export default function UsageLimits() {
     return (
       <div className="glass-card rounded-2xl p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-slate-700 rounded w-32 mb-4"></div>
+          <div className="h-6 bg-sg-border rounded w-32 mb-4"></div>
           <div className="space-y-4">
             {[1,2,3,4,5].map(i => (
-              <div key={i} className="h-12 bg-slate-700 rounded"></div>
+              <div key={i} className="h-12 bg-sg-border rounded"></div>
             ))}
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function UsageLimits() {
               </div>
 
               {/* Progress bar */}
-              <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden mb-1">
+              <div className="w-full h-2 bg-sg-border rounded-full overflow-hidden mb-1">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${percent}%` }}

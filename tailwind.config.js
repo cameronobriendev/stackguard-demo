@@ -7,17 +7,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Base
-        'sg-bg': '#0f172a',
-        'sg-card': '#1e293b',
-        'sg-border': '#334155',
-        // Status
+        // Theme-aware colors (CSS variables)
+        'sg-bg': 'var(--sg-bg)',
+        'sg-card': 'var(--sg-card)',
+        'sg-border': 'var(--sg-border)',
+        'sg-text': 'var(--sg-text)',
+        'sg-muted': 'var(--sg-muted)',
+
+        // Status colors (consistent across themes)
         'sg-healthy': '#10b981',
         'sg-warning': '#f59e0b',
         'sg-critical': '#ef4444',
-        // Accents
+
+        // Accent
         'sg-primary': '#3b82f6',
-        'sg-muted': '#94a3b8',
       },
     },
   },

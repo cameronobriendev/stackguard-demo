@@ -71,10 +71,10 @@ export default function ActiveAlerts() {
     return (
       <div className="glass-card rounded-2xl p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-slate-700 rounded w-32 mb-4"></div>
+          <div className="h-6 bg-sg-border rounded w-32 mb-4"></div>
           <div className="space-y-3">
-            <div className="h-24 bg-slate-700 rounded-xl"></div>
-            <div className="h-24 bg-slate-700 rounded-xl"></div>
+            <div className="h-24 bg-sg-border rounded-xl"></div>
+            <div className="h-24 bg-sg-border rounded-xl"></div>
           </div>
         </div>
       </div>

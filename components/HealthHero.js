@@ -58,9 +58,9 @@ export default function HealthHero() {
     return (
       <div className="glass-card rounded-2xl p-8 text-center">
         <div className="animate-pulse">
-          <div className="h-8 bg-slate-700 rounded w-64 mx-auto mb-8"></div>
-          <div className="h-32 bg-slate-700 rounded-full w-32 mx-auto mb-8"></div>
-          <div className="h-4 bg-slate-700 rounded w-48 mx-auto"></div>
+          <div className="h-8 bg-sg-border rounded w-64 mx-auto mb-8"></div>
+          <div className="h-32 bg-sg-border rounded-full w-32 mx-auto mb-8"></div>
+          <div className="h-4 bg-sg-border rounded w-48 mx-auto"></div>
         </div>
       </div>
     )
@@ -90,7 +90,7 @@ export default function HealthHero() {
         </motion.div>
 
         {/* Progress ring (simplified as bar) */}
-        <div className="w-48 h-2 bg-slate-700 rounded-full mx-auto mt-4 overflow-hidden">
+        <div className="w-48 h-2 bg-sg-border rounded-full mx-auto mt-4 overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${healthScore}%` }}
@@ -114,17 +114,17 @@ export default function HealthHero() {
       <div className="flex items-center justify-center gap-6 text-sm text-sg-muted">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-sg-primary text-lg">link</span>
-          <span><strong className="text-white">8</strong> Tools Connected</span>
+          <span><strong className="text-sg-text">8</strong> Tools Connected</span>
         </div>
         <div className="w-px h-4 bg-sg-border"></div>
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-sg-primary text-lg">automation</span>
-          <span><strong className="text-white">47</strong> Automations</span>
+          <span><strong className="text-sg-text">47</strong> Automations</span>
         </div>
         <div className="w-px h-4 bg-sg-border"></div>
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-sg-healthy text-lg live-pulse">radio_button_checked</span>
-          <span>Last check: <strong className="text-white">{lastCheck}s</strong> ago</span>
+          <span>Last check: <strong className="text-sg-text">{lastCheck}s</strong> ago</span>
         </div>
       </div>
     </motion.div>
