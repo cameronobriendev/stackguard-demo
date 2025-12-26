@@ -4,6 +4,14 @@ module.exports = {
     './app/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
   ],
+  safelist: [
+    'text-sg-healthy',
+    'text-sg-warning',
+    'text-sg-critical',
+    'bg-sg-healthy',
+    'bg-sg-warning',
+    'bg-sg-critical',
+  ],
   theme: {
     extend: {
       colors: {

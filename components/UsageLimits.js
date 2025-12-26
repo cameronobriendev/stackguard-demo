@@ -74,7 +74,7 @@ export default function UsageLimits() {
       className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-sg-text flex items-center gap-2">
           <Icon name="data_usage" className="text-sg-primary" size={24} />
           Usage & Limits
         </h3>
@@ -93,7 +93,7 @@ export default function UsageLimits() {
             >
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">{limit.tool}</span>
+                  <span className="text-sm font-medium text-sg-text">{limit.tool}</span>
                   <span className="text-xs text-sg-muted">{limit.metric}</span>
                 </div>
                 <div className="flex items-center gap-2">

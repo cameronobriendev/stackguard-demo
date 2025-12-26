@@ -58,7 +58,7 @@ export default function CostTracker() {
       className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-sg-text flex items-center gap-2">
           <Icon name="payments" className="text-sg-primary" size={24} />
           Monthly Costs
         </h3>
@@ -67,7 +67,7 @@ export default function CostTracker() {
       {/* Total cost */}
       <div className="mb-6">
         <div className="flex items-end gap-2 mb-1">
-          <span className="text-3xl font-bold">${displayTotal.toLocaleString()}</span>
+          <span className="text-3xl font-bold text-sg-text">${displayTotal.toLocaleString()}</span>
           <span className="text-sg-muted mb-1">/ month</span>
         </div>
         <div className={`flex items-center gap-1 text-sm ${costs.change > 0 ? 'text-sg-warning' : 'text-sg-healthy'}`}>
@@ -86,7 +86,7 @@ export default function CostTracker() {
             transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
             className="flex items-center gap-3"
           >
-            <span className="text-sm w-20 shrink-0">{item.tool}</span>
+            <span className="text-sm text-sg-text w-20 shrink-0">{item.tool}</span>
             <div className="flex-1 h-2 bg-sg-border rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
@@ -95,7 +95,7 @@ export default function CostTracker() {
                 className="h-full bg-sg-primary rounded-full"
               />
             </div>
-            <span className="text-sm font-medium w-14 text-right">${item.amount}</span>
+            <span className="text-sm font-medium text-sg-text w-14 text-right">${item.amount}</span>
             {item.change > 0 && (
               <span className="text-xs text-sg-warning">+${item.change}</span>
             )}

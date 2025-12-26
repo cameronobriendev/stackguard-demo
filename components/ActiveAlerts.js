@@ -70,7 +70,7 @@ export default function ActiveAlerts({ onAlertClick }) {
       className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-sg-text flex items-center gap-2">
           <Icon name="notifications_active" className="text-sg-warning" size={24} />
           Active Alerts
         </h3>
@@ -97,7 +97,7 @@ export default function ActiveAlerts({ onAlertClick }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2 mb-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-sm">{alert.title}</span>
+                        <span className="font-medium text-sm text-sg-text">{alert.title}</span>
                         <span className={`text-xs px-2 py-0.5 rounded-full text-white ${styles.badge}`}>
                           {alert.tool}
                         </span>

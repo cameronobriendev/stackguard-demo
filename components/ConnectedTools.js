@@ -82,7 +82,7 @@ export default function ConnectedTools() {
       className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-sg-text flex items-center gap-2">
           <Icon name="hub" className="text-sg-primary" size={24} />
           Connected Tools
         </h3>
@@ -101,7 +101,7 @@ export default function ConnectedTools() {
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Icon name={tool.icon} className="text-sg-muted group-hover:text-sg-text transition-colors" size={20} />
-                <span className="font-medium text-sm">{tool.name}</span>
+                <span className="font-medium text-sm text-sg-text">{tool.name}</span>
               </div>
               <div className={`w-2 h-2 rounded-full ${getStatusColor(tool.status)}`}></div>
             </div>

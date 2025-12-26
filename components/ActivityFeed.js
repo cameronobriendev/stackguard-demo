@@ -89,7 +89,7 @@ export default function ActivityFeed() {
       className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-sg-text flex items-center gap-2">
           <Icon name="history" className="text-sg-primary" size={24} />
           Activity Feed
         </h3>
@@ -117,7 +117,7 @@ export default function ActivityFeed() {
               <Icon name={activity.icon} className={getTypeStyles(activity.type)} size={18} />
               <div className="flex-1 min-w-0">
                 <span className="text-sm">
-                  <span className="font-medium">{activity.tool}</span>
+                  <span className="font-medium text-sg-text">{activity.tool}</span>
                   {' '}
                   <span className="text-sg-muted">"{activity.workflow}"</span>
                   {' '}
